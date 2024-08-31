@@ -91,7 +91,7 @@
         function generateClusterDiv(cluster){
           const clusterDiv = document.createElement("div");
 
-          clusterDiv.classList.add(cluster.acronym);
+          clusterDiv.classList.add("cluster");
 
           clusterDiv.appendChild(generateHeader(cluster.full_name, cluster.acronym));
           clusterDiv.appendChild(generateOrgList(cluster.orgs));
