@@ -1,16 +1,16 @@
 let button = document.querySelector('#button')
 
 
-function networkRequest(url, callBack){
+// function networkRequest(url, callBack){
     
-    let xhr = new XMLHttpRequest()
+//     let xhr = new XMLHttpRequest()
 
-    xhr.addEventListener('load', callBack)
+//     xhr.addEventListener('load', callBack)
 
-    xhr.open('GET', 
-        url)
-    xhr.send()
-}
+//     xhr.open('GET', 
+//         url)
+//     xhr.send()
+// }
 
 // function buttonClickHandler(evt){   
 //     // console.log(evt)
@@ -25,17 +25,17 @@ function networkRequest(url, callBack){
 //     xhr.send()
 //     }
 
-function buttonClickHandler(evt){
-    networkRequest('https://jsonplaceholder.typicode.com/posts').then(res => {
-        console.log(res)
-        let response = JSON.parse(res)
-        return networkRequest('https://jsonplaceholder.typicode.com/posts/1')
-    }).then(res => {
-        console.log(JSON.parse(res).title)
-    }).catch(err => {
-        console.error(err)
-    })
-}
+// function buttonClickHandler(evt){
+//     networkRequest('https://jsonplaceholder.typicode.com/posts').then(res => {
+//         console.log(res)
+//         let response = JSON.parse(res)
+//         return networkRequest('https://jsonplaceholder.typicode.com/posts/1')
+//     }).then(res => {
+//         console.log(JSON.parse(res).title)
+//     }).catch(err => {
+//         console.error(err)
+//     })
+// }
 
 // function buttonClickHandler(evt){
 //     networkRequest('https://jsonplaceholder.typicode.com/posts', evt => {
@@ -43,7 +43,11 @@ function buttonClickHandler(evt){
 //     })
 // }
 
-button.addEventListener('click', buttonClickHandler)
+// button.addEventListener('click', buttonClickHandler)
+
+function buttonClickHandler(evt){
+    console.log(evt.clientX)
+}
 
 // button.addEventListener('mouseover', evt => {
 //     console.log(evt.clientX)
@@ -53,9 +57,7 @@ button.addEventListener('click', buttonClickHandler)
 //     console.log(evt.clientX)
 // })
 
-button.addEventListener('click', evt => {
-    console.log('Second Handler')
-})
+button.addEventListener('click', buttonClickHandler)
 
 window.addEventListener('load', evt => {
     console.log('Window Loaded')
