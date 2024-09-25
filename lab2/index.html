@@ -6,15 +6,66 @@
     <title>Lab 2: Event Handling</title>
   </head>
   <body>
-    <form id="form"> 
+    <h1>Event Handling Dictionary</h1>
+
+    <div id="search"> 
         <input type="search" id="searchbar" placeholder="Search word...">
         <button id="searchbutton">Search</button>
-    </form>
+    </div>
+
+    <div id="definition">
+      <p id="point"></p>
+    </div>
 
     <script>
-        let searchbutton = document.querySelector('#searchbutton')
+        const searchbutton = document.querySelector('#searchbutton')
+        const searchbar = document.querySelector('#searchbar')
+        const point = document.querySelector('#point')
+        const definition = document.querySelector('#definition')
+        var word
+
         searchbutton.addEventListener('click', evt => {
-            console.log('Clicked')})
+          word = searchbar.value.trim();
+          searchbar.value = ''
+          fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`).then(res => {
+            return res.json();
+          }).then (res => {
+            if (res.title === 'No Definitions Found'){
+              const result = document.createElement("p");
+              result.textContent = "Word does not exist"
+              definition.appendChild(result)
+            }
+            else {
+              definition.innerHTML = ''
+              const wordTitle = document.createElement("h3");
+              wordTitle.textContent = word
+              definition.appendChild(wordTitle)
+              showDefinitions(res)
+            }
+          })
+          })
+
+          function showDefinitions(data){
+            data.forEach(dfns => {
+              const psos = dfns.meanings;
+              
+              psos.forEach(pos => {
+              const dfn = document.createElement('div');
+              definition.appendChild(dfn)
+
+              const postype = document.createElement('div');
+              postype.textContent = `Part of speech: ${pos.partOfSpeech}`;
+              dfn.appendChild(postype);
+
+              pos.definitions.forEach((defn, index) => {
+                  const dfnentry = document.createElement('p');
+                  dfnentry.textContent = `${index + 1}. ${defn.definition}`;
+                  dfn.appendChild(dfnentry);
+              })
+            });
+          });
+          }
+
     </script>
   </body>
 </html>
