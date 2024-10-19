@@ -17,6 +17,8 @@
       <p id="point"></p>
     </div>
 
+    <audio id="song" src="song.mp3"></audio>
+
     <script type="module">
         import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js';
         const searchbutton = document.querySelector('#searchbutton')
@@ -25,7 +27,7 @@
         const definition = document.querySelector('#definition')
         var word
 
-        // 3D Animations start here
+        // 3D Assets start here
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera( 30, 1, 0.1, 1000 );
 
@@ -70,8 +72,50 @@
 
         }
 
-        //3D Animations end here
+        //3D Assets end here
 
+        //3D Animations start here
+        function animateElement(dfnentry) {
+            dfnentry.animate(
+                [
+                    { transform: "rotate(120deg)"},
+                    { transform: "rotate(-360deg)"},
+                ],
+                {
+                    duration: 3000,
+                    iterations: 1,
+                }
+            );
+        }
+
+        function animateHeaderElement(dfn) {
+            dfn.animate(
+                [
+                    { transform: "rotate(120deg)"},
+                    { transform: "rotate(360deg)"},
+                ],
+                {
+                    duration: 3000,
+                    iterations: 1,
+                }
+            );
+        }
+
+        //Web Audio stuff
+        const audio = document.querySelector('#song');
+
+        audio.currentTime = 53;
+
+        function playAudio(){
+          audio.play()
+            setTimeout(() => {
+                audio.pause(); 
+                audio.currentTime = 53; } 
+                , 5000);
+        }
+
+
+        //Reload stuff
         window.addEventListener('load', () => {
             const word = localStorage.getItem('word')
             if (word){
@@ -86,6 +130,7 @@
             localStorage.setItem('word', word)
             searchWord(word)
             searchbar.value = ''
+            playAudio()
           }
           })
 
@@ -115,15 +160,18 @@
               psos.forEach(pos => {
               const dfn = document.createElement('div');
               definition.appendChild(dfn)
+              animateHeaderElement(dfn)
 
               const postype = document.createElement('div');
               postype.textContent = `Part of speech: ${pos.partOfSpeech}`;
               dfn.appendChild(postype);
+              animateHeaderElement(postype)
 
               pos.definitions.forEach((defn, index) => {
                   const dfnentry = document.createElement('p');
                   dfnentry.textContent = `${index + 1}. ${defn.definition}`;
                   dfn.appendChild(dfnentry);
+                  animateElement(dfnentry)
               })
             });
           });
