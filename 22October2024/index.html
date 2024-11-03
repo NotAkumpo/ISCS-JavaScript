@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Index</title>
+  </head>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      //class Reusable {
+      //  #private
+      //  constructor(name='Default') {
+      //    this.name = name
+      //    this.#private = 'this is private'
+      //  }
+      //  static hello() {
+      //    console.log('hello')
+      //  }
+      //  world() {
+      //    console.log('world')
+      //  }
+      //  getName() {
+      //    return this.name
+      //  }
+      //  foo(arg1, arg2=null) {
+      //    if(arg2) {
+      //      console.log(arg2)
+      //    }
+      //  }
+      //  getPrivate() {
+      //    console.log(this.#private)
+      //  }
+      //}
+      //Reusable.hello()
+      //let r = new Reusable()
+      //r.world()
+      //console.log(r.getName())
+      //let e = new Reusable('r')
+      //console.log(e.getName())
+      //e.foo('arg1')
+      //e.foo('arg1', 'arg2')
+      //e.getPrivate()
+      //console.log(e.#private)
+    </script>
+    <script type="module">
+      import { PostsAPI, UsersAPI, VALUES } from './module.js'
+
+      const api = new PostsAPI()
+      api.getAllPosts().then(res => {
+        console.log(res.data)
+      })
+      console.log(VALUES)
+    </script>
+  </body>
+</html>
