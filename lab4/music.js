@@ -4,11 +4,11 @@ export class Music {
         this.audio.currentTime = 53;
     }
 
-    static playAudio(){
+    playAudio(){
         this.audio.play()
           setTimeout(() => {
-              audio.pause(); 
-              audio.currentTime = 53; } 
+              this.audio.pause(); 
+              this.audio.currentTime = 53; } 
               , 5000);
       }
 }

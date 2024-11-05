@@ -1,7 +1,7 @@
-import { Refresher } from "./refresh"
-import { ThreeDAssets } from "./3dassets"
-import { Music } from "./music"
-import { Animations } from "./animation"
+import { Refresher } from "./refresh.js";
+import { ThreeDAssets } from "./3dassets.js";
+import { Music } from "./music.js";
+import { Animations } from "./animations.js";
 
 
 const searchbutton = document.querySelector('#searchbutton')
@@ -12,7 +12,6 @@ const audio = document.querySelector('#song');
 
 const threeDAsset = new ThreeDAssets()
 const music = new Music(audio)
-threeDAsset.animate()
 
 
 window.addEventListener('load', () => {
@@ -64,7 +63,7 @@ function showDefinitions(data){
       const postype = document.createElement('div');
       postype.textContent = `Part of speech: ${pos.partOfSpeech}`;
       dfn.appendChild(postype);
-      animateHeaderElement(postype)
+      Animations.animateHeaderElement(postype)
 
       pos.definitions.forEach((defn, index) => {
           const dfnentry = document.createElement('p');

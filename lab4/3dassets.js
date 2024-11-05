@@ -2,48 +2,48 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.m
 
 export class ThreeDAssets {
     constructor(){
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera( 30, 1, 0.1, 1000 );
+        this.scene = new THREE.Scene();
+        this.camera = new THREE.PerspectiveCamera( 30, 1, 0.1, 1000 );
 
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize( 500, 500 );
-        renderer.setAnimationLoop( animate );
-        document.body.appendChild( renderer.domElement );
+        this.renderer = new THREE.WebGLRenderer();
+        this.renderer.setSize( 500, 500 );
+        this.renderer.setAnimationLoop(this.animate.bind(this));
+        document.body.appendChild( this.renderer.domElement );
 
-        const rectangleGeometry = new THREE.BoxGeometry( 0.5, 0.5, 1 );
-        const rectangleMaterial = new THREE.MeshBasicMaterial( { color: 0x0000ff, wireframe: true } );
-        const rectangle = new THREE.Mesh( rectangleGeometry, rectangleMaterial );
-        rectangle.position.set(-0.5, 0.7, 0)
-        scene.add( rectangle );
+        this.rectangleGeometry = new THREE.BoxGeometry( 0.5, 0.5, 1 );
+        this.rectangleMaterial = new THREE.MeshBasicMaterial( { color: 0x0000ff, wireframe: true } );
+        this.rectangle = new THREE.Mesh( this.rectangleGeometry, this.rectangleMaterial );
+        this.rectangle.position.set(-0.5, 0.7, 0)
+        this.scene.add( this.rectangle );
 
-        const dodecahedronGeometry = new THREE.DodecahedronGeometry(0.5, 0);
-        const dodecahedronMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true });
-        const dodecahedron = new THREE.Mesh(dodecahedronGeometry, dodecahedronMaterial);
-        dodecahedron.position.set(0.75, 0.15, 0);
-        scene.add(dodecahedron);
+        this.dodecahedronGeometry = new THREE.DodecahedronGeometry(0.5, 0);
+        this.dodecahedronMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true });
+        this.dodecahedron = new THREE.Mesh(this.dodecahedronGeometry, this.dodecahedronMaterial);
+        this.dodecahedron.position.set(0.75, 0.15, 0);
+        this.scene.add(this.dodecahedron);
 
-        const capsuleGeometry = new THREE.CapsuleGeometry( 0.45, 0.6, 1, 28 ); 
-        const capsuleMaterial = new THREE.MeshBasicMaterial( {color: 0xffff00, wireframe: true } ); 
-        const capsule = new THREE.Mesh( capsuleGeometry, capsuleMaterial ); 
-        capsule.position.set(-0.4, -0.6, 0)
-        scene.add( capsule );
+        this.capsuleGeometry = new THREE.CapsuleGeometry( 0.45, 0.6, 1, 28 ); 
+        this.capsuleMaterial = new THREE.MeshBasicMaterial( {color: 0xffff00, wireframe: true } ); 
+        this.capsule = new THREE.Mesh( this.capsuleGeometry, this.capsuleMaterial ); 
+        this.capsule.position.set(-0.4, -0.6, 0)
+        this.scene.add( this.capsule );
 
 
-        camera.position.z = 5;
+        this.camera.position.z = 5;
     }
 
-    static animate(){
+    animate(){
 
-        rectangle.rotation.x += 0.01;
-        rectangle.rotation.y -= 0.03;
+        this.rectangle.rotation.x += 0.01;
+        this.rectangle.rotation.y -= 0.03;
 
-        dodecahedron.rotation.y -= 0.01;
+        this.dodecahedron.rotation.y -= 0.01;
 
-        capsule.rotation.x += 0.02;
-        capsule.rotation.y += 0.02;
+        this.capsule.rotation.x += 0.02;
+        this.capsule.rotation.y += 0.02;
 
 
-        renderer.render( scene, camera );
+        this.renderer.render( this.scene, this.camera );
 
     }
 }
